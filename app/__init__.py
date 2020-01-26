@@ -22,5 +22,7 @@ def check_ver():
         response = binary_path
     else:
         response = "update not needed"
-    return response
-
+    if response is not "":
+        return response
+    else:
+        return "no name found", 404
