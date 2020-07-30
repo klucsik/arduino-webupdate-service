@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "a4cb059c-4939-4c12-a7dd-29c31f7b0248",
+		"name": "arduino-webupdate-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "tc1-new_update_link",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "239ae399-1e63-4deb-a20f-adcf1745aea0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(\"/static/bin/test/0_1.bin\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/check?name=test&ver=0_0",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"check"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "test"
+						},
+						{
+							"key": "ver",
+							"value": "0_0"
+						}
+					]
+				},
+				"description": "Scenario: There is a new version\n        Given the server has a folder with binary named 'test'\n        And it has a binary with version 0_1\n        When I make a request with name: 'test' and version: '0_0'\n        Then I get a response: '/static/bin/test/0_1.bin'"
+			},
+			"response": []
+		},
+		{
+			"name": "tc2-no update needed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "09fb276a-d4bb-4c2b-ac44-f87efa9e82aa",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(\"update not needed\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/check?name=test&ver=0_1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"check"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "test"
+						},
+						{
+							"key": "ver",
+							"value": "0_1"
+						}
+					]
+				},
+				"description": "Scenario: There is no new version\n        Given the server has a folder with binary named 'test'\n        And it has a binary with version 0_1\n        When I make a request with name: 'test' and version: '0_1'\n        Then I get a response: 'update not needed'"
+			},
+			"response": []
+		},
+		{
+			"name": "tc3-name not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f6175a64-1391-4f45-b5e7-40a17fd92eda",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(\"update not needed\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/check?name=test&ver=0_1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"check"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "test"
+						},
+						{
+							"key": "ver",
+							"value": "0_1"
+						}
+					]
+				},
+				"description": "    Scenario: There is no such device name\n        Given the server doesn't have a folder with name: 'notexist'\n        And it has a binary with version 0_1\n        When I make a request with name: 'notexist' and version: '0_0'\n        Then I get a response with status code 404"
+			},
+			"response": []
+		},
+		{
+			"name": "tc4-binary is reachable",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0d05370-f38a-484e-8557-a3f26c86a0c0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body containes string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"CALLBACK\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/static/bin/test/0_1.bin",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"static",
+						"bin",
+						"test",
+						"0_1.bin"
+					]
+				},
+				"description": "    Scenario: There is no such device name\n        Given the server doesn't have a folder with name: 'notexist'\n        And it has a binary with version 0_1\n        When I make a request with name: 'notexist' and version: '0_0'\n        Then I get a response with status code 404"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
