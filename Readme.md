@@ -1,6 +1,7 @@
 # Simple arduino update service
 
 [![Build Status](https://travis-ci.org/klucsik/arduino-webupdate-service.svg?branch=master)](https://travis-ci.org/klucsik/arduino-webupdate-service)
+[![Coverage Status](https://coveralls.io/repos/github/klucsik/arduino-webupdate-service/badge.svg?branch=master)](https://coveralls.io/github/klucsik/arduino-webupdate-service?branch=master)
 
 This application serves my arduino devices with updates when there is a new version available.
 * It can distinguish between devices by devices based on the name parameter.
