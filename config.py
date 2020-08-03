@@ -9,4 +9,4 @@ load_dotenv(os.path.join(basedir, '.env'))
 
 class Config(object):
     BASEDIR = basedir
-    STATIC = basedir + "/app/static/"
+    STATIC = basedir + "/myapp/static/"

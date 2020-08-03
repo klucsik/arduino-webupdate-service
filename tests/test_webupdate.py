@@ -1,6 +1,6 @@
 import unittest
-from app import app
 
+from myapp import app
 
 
 class new_version(unittest.TestCase):
