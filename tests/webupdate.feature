@@ -17,6 +17,5 @@ For this I need the link for the binaries, when update needed.
 
     Scenario: There is no such device name
         Given the server doesn't have a folder with name: 'notexist'
-        And it has a binary with version 0_1
         When I make a request with name: 'notexist' and version: '0_0'
         Then I get a response with status code 404
