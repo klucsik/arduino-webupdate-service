@@ -18,6 +18,7 @@ pipeline {
     stage('deploy on k8s') {
       steps {
         container(name: 'kubectl'){
+          sh 'sed -i "s/JENKINS_WILL_CHANGE_THIS_WHEN_REDEPLOY_NEEDED_BASED_ON_CHANGE/$(date)/" k8s/deploy_arduino-webupdate.yaml'
           sh 'kubectl apply -f k8s/deploy_arduino-webupdate.yaml'
           sh 'kubectl rollout status deployment/arduino-webupdate --namespace=arduino-webupdate'
         }

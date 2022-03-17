@@ -46,6 +46,9 @@ spec:
         - name: backend
           image: registry.klucsik.fun/arduino-webupdate
           imagePullPolicy: Always
+          env:
+            - name: REDEPLOY_FLAG
+              value: "JENKINS_WILL_CHANGE_THIS_WHEN_REDEPLOY_NEEDED_BASED_ON_CHANGE"
 
 ---
 
