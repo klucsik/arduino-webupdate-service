@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: arduino-webupdate
+
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: arduino-webupdate-klucsikfun
+  namespace: arduino-webupdate
+spec:
+  rules:
+    - host: arduino-webupdate.klucsik.fun
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: arduino-webupdate-svc
+                port:
+                  number: 80
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: arduino-webupdate-deployment
+  namespace: arduino-webupdate
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: backend
+      service: arduino-webupdate
+  template:
+    metadata:
+      labels:
+        type: backend
+        service: arduino-webupdate
+    spec:
+      containers:
+        - name: backend
+          image: registry.klucsik.fun/arduino-webupdate
+          imagePullPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: arduino-webupdate-svc
+  namespace: arduino-webupdate
+spec:
+  ports:
+    - port: 80
+      targetPort: 5000
+  selector:
+    type: backend
+    service: arduino-webupdate
+
+---
