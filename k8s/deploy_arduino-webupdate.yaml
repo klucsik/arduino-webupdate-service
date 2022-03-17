@@ -28,7 +28,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: arduino-webupdate-deployment
+  name: arduino-webupdate
   namespace: arduino-webupdate
 spec:
   replicas: 1
