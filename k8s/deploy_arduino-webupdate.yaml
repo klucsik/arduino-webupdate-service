@@ -9,11 +9,11 @@ metadata:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: arduino-webupdate-klucsikfun
+  name: arduino-webupdate-klucsikhu
   namespace: arduino-webupdate
 spec:
   rules:
-    - host: arduino-webupdate.klucsik.fun
+    - host: arduino-webupdate.klucsik.hu
       http:
         paths:
           - pathType: Prefix
@@ -44,7 +44,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: registry.klucsik.fun/arduino-webupdate
+          image: registry.klucsik.hu/arduino-webupdate
           imagePullPolicy: Always
           env:
             - name: REDEPLOY_FLAG
