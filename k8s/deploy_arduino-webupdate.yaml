@@ -23,6 +23,16 @@ spec:
                 name: arduino-webupdate-svc
                 port:
                   number: 80
+    - host: arduino-webupdate.klucsik.fun #deprecated
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: arduino-webupdate-svc
+                port:
+                  number: 80
 
 ---
 apiVersion: apps/v1
